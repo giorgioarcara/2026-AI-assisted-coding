@@ -1,0 +1,28 @@
+# Slides PDF is published as a GitHub release, not tracked
+*.pdf
+
+# R / RStudio
+.Rhistory
+.RData
+.Rproj.user/
+
+# LaTeX / Quarto build files
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.synctex.gz
+*.tex
+!preamble.tex
+*_files/
+
+# OS noise
+.DS_Store
+Icon?

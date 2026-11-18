@@ -1,0 +1,308 @@
+---
+format:
+  beamer:
+    keep-tex: false
+    incremental: false
+    theme: metropolis
+    colortheme: default
+    fonttheme: structurebold
+header-includes:
+  - \setbeamertemplate{footline}[frame number]
+  - \setbeamertemplate{navigation symbols}{}
+  - \usepackage{tcolorbox}
+  - \usepackage{tikz}
+---
+
+
+##
+
+```{=latex}
+% TITLE SLIDES
+\title{\fontsize{16pt}{18pt}\selectfont Good Practices for AI-assisted coding}
+\author{Giorgio Arcara}
+
+\titlegraphic{
+\vspace*{7cm}
+\includegraphics[scale=0.15]{Figures/LogoSanCamilloIRCCS_Unipd_alpha.png}
+\begin{center}
+\vspace{-2.2em}
+\includegraphics[scale=0.15]{Figures/CC_license_3_0.png}
+\end{center}
+}
+\date{05/06/2026}
+\maketitle
+```
+
+## Aphorism 1
+
+\centering
+\emph{“How we spend our days is, of course, how we spend our lives.”} 
+― Annie Dillard, ``The Writing Life''
+
+
+## Aphorism 2
+
+\emph{"In every animal... a more frequent and continuous use of any organ gradually strengthens, develops and enlarges that organ... while the permanent disuse of any organ imperceptibly weakens and deteriorates it..."\\}
+― Carl Lamarck, ``Zoological Philosophy''
+
+## Aphorism 3
+
+![](Figures/AGC_chisafare.jpg){fig-align="center" width="70%"}
+
+
+## LLMs are powerful tools...
+
+- They accelerate prototyping
+- They explain unfamiliar syntax and suggest solutions
+- They lower the barrier to getting something working
+
+\vspace{1em}
+\pause
+
+\begin{center}
+\large \textbf{...but in research, \emph{working code} is not the goal.}
+\end{center}
+
+
+## Solving the problem is the aim.
+
+\small
+
+In research, code is a **means**, not an end. The real deliverable is a **solving a specific research problem** — and that claim can only be as solid as the researcher's understanding of the pipeline that produced it.
+
+\pause
+\vspace{0.3em}
+
+Not having a mental model means:
+
+- You cannot **defend** your methodological choices
+- You cannot **catch errors** before they become published mistakes
+- You cannot **adapt** the analysis to a new dataset or reviewer request
+- You cannot **teach** your methods to others
+
+\pause
+
+\begin{center}
+\textit{Working code without understanding is not a research output. It is a liability.}
+\end{center}
+
+
+## Bloom's Taxonomy of cognitive skills
+
+```{=latex}
+\begin{center}
+\begin{tikzpicture}[font=\small\bfseries, scale=0.88]
+  % Level 0: Remember (widest, at bottom)
+  \filldraw[fill=blue!25, draw=white, line width=1.5pt]
+    (-3.00,0.00) -- (3.00,0.00) -- (2.65,0.72) -- (-2.65,0.72) -- cycle;
+  \node[black!70] at (0,0.36) {Remember};
+  % Level 1: Understand
+  \filldraw[fill=blue!55, draw=white, line width=1.5pt]
+    (-2.65,0.72) -- (2.65,0.72) -- (2.30,1.44) -- (-2.30,1.44) -- cycle;
+  \node[white] at (0,1.08) {Understand};
+  % Level 2: Apply
+  \filldraw[fill=teal!60, draw=white, line width=1.5pt]
+    (-2.30,1.44) -- (2.30,1.44) -- (1.95,2.16) -- (-1.95,2.16) -- cycle;
+  \node[white] at (0,1.80) {Apply};
+  % Level 3: Analyse
+  \filldraw[fill=yellow!80!orange, draw=white, line width=1.5pt]
+    (-1.95,2.16) -- (1.95,2.16) -- (1.60,2.88) -- (-1.60,2.88) -- cycle;
+  \node[black!80] at (0,2.52) {Analyse};
+  % Level 4: Evaluate
+  \filldraw[fill=orange!85, draw=white, line width=1.5pt]
+    (-1.60,2.88) -- (1.60,2.88) -- (1.25,3.60) -- (-1.25,3.60) -- cycle;
+  \node[white] at (0,3.24) {Evaluate};
+  % Level 5: Create (narrowest, at top)
+  \filldraw[fill=red!65, draw=white, line width=1.5pt]
+    (-1.25,3.60) -- (1.25,3.60) -- (0.90,4.32) -- (-0.90,4.32) -- cycle;
+  \node[white] at (0,3.96) {Create};
+\end{tikzpicture}
+\end{center}
+```
+
+
+## The core problem
+
+\small
+
+**Bloom's Taxonomy** spans from the most superficial level (**Remember**) to the most demanding (**Create**).
+
+Genuine coding competence sits at the top: **Create** — the ability to design and produce solutions.
+
+\pause
+\vspace{0.3em}
+
+**LLMs anchor you at the bottom.**
+
+When a working solution is handed to you before you have wrestled with the problem, you interact with code at its lowest level — **Remember**: recognising patterns, running scripts, adjusting parameters.
+
+\pause
+\vspace{0.3em}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=0.5pt, arc=2pt]
+\small All good practices in this guide share one goal: \textbf{pushing you up Bloom's Taxonomy} — away from familiarity, toward genuine competence.
+\end{tcolorbox}
+
+
+## Who is at risk?
+
+```{=latex}
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Experienced programmers}
+\vspace{0.5em}
+
+Risk: gradual \emph{atrophy} of problem-decomposition skills.
+
+The skills do not disappear overnight --- they quietly erode as cognitive work is increasingly outsourced.
+
+\column{0.5\textwidth}
+\textbf{Junior researchers}
+\vspace{0.5em}
+
+Risk: becoming anchored at \emph{Remember} — mistaking familiarity for understanding.
+
+It is possible to run scripts, adjust parameters, and produce outputs without any mental model of what the code does. Research demands \emph{Create}.
+\end{columns}
+```
+
+
+## Before any practice: define the problem
+
+\small
+
+In research, coding exists to **solve a problem**. This has a non-obvious implication: if the problem is not clearly defined, no amount of working code solves it.
+
+\vspace{0.3em}
+
+An LLM is very good at solving the problem you give it — the risk is **giving it the wrong problem** because you have not thought it through yourself first.
+
+\pause
+\vspace{0.3em}
+
+Before writing a single line of code, be able to answer in plain language:
+
+- What question am I trying to answer?
+- What does the input look like, and what should the output look like?
+- What would a correct result look like — and how would I recognise a wrong one?
+
+\pause
+\vspace{0.3em}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=0.5pt, arc=2pt]
+\small If you cannot answer these questions, you are not ready to code — and not ready to prompt.
+\end{tcolorbox}
+
+
+# Practices for Experienced Programmers
+
+
+## Practices for experienced programmers
+
+\small
+
+**Trace before you accept** \
+Before committing any LLM-generated code, trace through it mentally. Ask: *What does each step do? What are the failure modes?*
+
+\vspace{0.3em}
+
+**Design the algorithm first** \
+Sketch the algorithm yourself *before* prompting. Use the LLM to *implement* your design — not to invent it.
+
+\vspace{0.3em}
+
+**Code without LLM regularly** \
+Schedule sessions without LLM assistance as a diagnostic. If a familiar task feels surprisingly hard, that is a signal.
+
+\vspace{0.3em}
+
+**Seek friction deliberately** \
+When learning something new, resist letting the LLM smooth every difficulty. Struggle is the mechanism of learning.
+
+
+# Practices for Junior Researchers
+
+
+## Practices for junior researchers (1)
+
+\small
+
+**Blank-page reconstruction** \
+After using LLM code, close it and rewrite from scratch. Where you get stuck reveals exactly what you have not understood.
+
+\vspace{0.3em}
+
+**Inverted rubber duck** \
+Explain the LLM's code back to it in your own words, then ask it to find gaps in your explanation.
+
+\vspace{0.3em}
+
+**Write tests before asking for code** \
+Write down what correct behaviour looks like *before* asking the LLM. This forces you to understand the problem first.
+
+
+## Practices for junior researchers (2)
+
+\small
+
+**Keep a bug journal** \
+Log bugs and how they were resolved. Focus on the *why*: what was your incorrect mental model, and how did it get corrected?
+
+\vspace{0.3em}
+
+**Change one variable at a time** \
+Debugging is where you practise Analyse and Evaluate — the levels that cannot be climbed by delegation. Form a hypothesis, change exactly one thing, and observe. Only reach for the LLM after at least one genuine attempt yourself.
+
+\vspace{0.3em}
+
+**Decompose before prompting** \
+For any non-trivial task, write the sub-problems down first. The act of decomposition is where much of the learning happens.
+
+
+## Summary
+
+```{=latex}
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=0.5pt, arc=2pt]
+\centering\small \textbf{Everyone:} define the problem before coding or prompting.
+\end{tcolorbox}
+
+\vspace{0.4em}
+
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Experienced programmers}
+\begin{itemize}\footnotesize
+  \item Trace LLM code before accepting
+  \item Design algorithm before prompting
+  \item Code without LLM (diagnostic)
+  \item Seek friction deliberately
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Junior researchers}
+\begin{itemize}\footnotesize
+  \item Blank-page reconstruction
+  \item Inverted rubber duck
+  \item Tests before code
+  \item Bug journal
+  \item One variable at a time
+  \item Decompose before prompting
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=0.5pt, arc=2pt]
+\centering\small
+Use the LLM to implement and to check --- not to think in your place.\\
+The goal is to remain the \emph{author of your own understanding}.
+\end{tcolorbox}
+```
+
+
+## But ...
+\centering
+
+What are we \emph{losing}, in the long run?
+
+See \href{https://www.linkedin.com/posts/andrea-colamedici-77751b53_lia-generativa-rischia-di-creare-la-prima-activity-7461700151020044288-G_cx?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAAQxINIBwAMnzPdv0ws0GmcaY4nD3MsuICU}{\underline{here}}
